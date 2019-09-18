@@ -11,7 +11,7 @@
 # the credentials every time we run this script. That seems acceptable to me.
 
 # Neptune API token info is here: https://neptune-client.readthedocs.io/en/latest/tutorials/get-started.html#copy-api-token
-echo "[setup.sh] Please enter the Neptune API token."
+echo "[setup2.sh] Please enter the Neptune API token."
 read -s neptune_api_token
 export NEPTUNE_API_TOKEN="$neptune_api_token"
 

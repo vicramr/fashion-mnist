@@ -1,7 +1,9 @@
 # fashion-mnist
-This is a project using my `kaggle-template` project template.
+This is a project using my [kaggle-template](https://github.com/vicramr/kaggle-template) project template.
 
 The setup scripts are currently only written to work on Unix-based systems, which means that they should work correctly on Linux and macOS but not Windows. However, apart from those, everything is written to work cross-platform, including on Windows. Most of the setup is pretty straightforward to do on Windows, except perhaps setting the environment variables.
+
+This project has Zalando's official [Fashion MNIST repository](https://github.com/zalandoresearch/fashion-mnist) as a submodule. This contains the actual dataset.
 
 ## Setup
 In order to use this repo you will need to first install Anaconda or Miniconda.

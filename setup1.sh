@@ -16,5 +16,8 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"  # The -P optio
 # The above snippet assigned the absolute path to the parent directory of this file to DIR. Now we can actually cd.
 cd "$DIR"
 
-echo "[setup.sh] Now setting up conda environment."
+echo "[setup1.sh] Now setting up conda environment."
 conda env create -f environment.yml
+
+echo "[setup1.sh] Now ensuring the data is downloaded."
+git submodule update --init --recursive
