@@ -1,0 +1,17 @@
+name: myenv
+dependencies:  # Version numbers should all be the most recent releases, for the most part. I specify the major/minor version numbers to help ensure replicability.
+ - python=3.6  # This is not the most recent release but the Keras docs say it only works up to 3.6: https://keras.io/#you-have-just-found-keras
+ - pip=19.2.*  # Conda complains if you don't have an explicit pip dependency
+ - scipy=1.3.*
+ - scikit-learn=0.21.*
+ - pandas=0.25.*
+ - matplotlib=3.1.*
+ - joblib=0.13.2  # This is used to save scikit-learn models to disk
+ - tensorflow=1.14.*  # Required as the backend for Keras
+ - keras=2.2.*
+ - jupyter>=1.*  # It appears that Anaconda's version of the plain jupyter package is 1.0.0. I'm not sure what's up with that. But this should work fine
+ - psutil=5.6.*  # Recommended for use with neptune-client: https://neptune-client.readthedocs.io/en/latest/tutorials/get-started.html#install-neptune-client
+ - pytest=5.*
+ - pip:  # These args are passed directly to pip, so we need to use the pip syntax which uses '==' instead of '='.
+   - kaggle==1.5.*
+   - neptune-client==0.4.*
