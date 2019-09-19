@@ -16,4 +16,3 @@ def get_src_files():
     list_of_concrete_paths = Path("src").glob("**/*.py") # See here for an example of how this works: https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob
     # The elements of the list are path-like objects. To turn those into strings (in the style of the local platform), we use the os.fspath function.
     return [os.fspath(path) for path in list_of_concrete_paths]
-

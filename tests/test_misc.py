@@ -10,7 +10,7 @@ def test_trivial():
     """
     assert True
 
-import utils
+from src import utils
 
 def test_get_src_files():
     """
@@ -20,4 +20,4 @@ def test_get_src_files():
     list_of_files = utils.get_src_files()
     assert os.path.join("src", "experiment1.py") in list_of_files
     assert os.path.join("src", "utils.py") in list_of_files
-    assert os.path.join("src", "main.py") in list_of_files
+    assert os.path.join("src", "initialize.py") in list_of_files
