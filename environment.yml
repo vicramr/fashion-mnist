@@ -2,6 +2,7 @@ name: fashionmnist
 dependencies:  # Version numbers should all be the most recent releases, for the most part. I specify the major/minor version numbers to help ensure replicability.
  - python=3.6  # This is not the most recent release but the Keras docs say it only works up to 3.6: https://keras.io/#you-have-just-found-keras
  - pip=19.2.*  # Conda complains if you don't have an explicit pip dependency
+ - numpy=1.16.*
  - scipy=1.3.*
  - scikit-learn=0.21.*
  - pandas=0.25.*
