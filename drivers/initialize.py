@@ -20,15 +20,15 @@ def initialize():
     terminate the process with an exception.
 
     In order for this function to work correctly, Python MUST be invoked using
-    a driver script in the 'src' directory, NOT in a subdirectory of 'src'.
+    a driver script in the 'drivers' directory, NOT in a subdirectory of 'drivers'.
 
     Note: when a driver script imports this file, it will have to do so with
-    an import that's relative to 'src' rather than the project root. This is
-    unfortunate but unavoidable; the path to 'src' is the only one that starts
+    an import that's relative to 'drivers' rather than the project root. This is
+    unfortunate but unavoidable; the path to 'drivers' is the only one that starts
     off in sys.path, which is the reason that the driver needs to call initialize()
     in the first place! So there's a bit of a chicken-and-egg problem. The
     upshot is that there's a bit of ugliness in the code, in the sense that
-    'import initialize' is relative to 'src' but every other import in the project
+    'import initialize' is relative to 'drivers' but every other import in the project
     is relative to the project root dir. Still, I think this is the minimally
     ugly way to do it.
     """
@@ -36,9 +36,9 @@ def initialize():
     if not os.path.isfile(arg0):
         sys.exit("sys.argv[0] is not a path to a file: \"" + str(arg0) + "\". Exiting now.")
     absolute_path_to_file = os.path.realpath(arg0) # realpath follows symlinks, which is what we want in this case.
-    absolute_path_to_src = os.path.dirname(absolute_path_to_file)
-    (absolute_path_to_repo, src_dirname) = os.path.split(absolute_path_to_src)
-    if src_dirname != "src":
-        sys.exit("The driver script should be located in directory \"src\". It is instead in \"" + src_dirname + "\". Exiting now.")
+    absolute_path_to_drivers = os.path.dirname(absolute_path_to_file)
+    (absolute_path_to_repo, drivers_dirname) = os.path.split(absolute_path_to_drivers)
+    if drivers_dirname != "drivers":
+        sys.exit("The driver script should be located in directory \"drivers\". It is instead in \"" + drivers_dirname + "\". Exiting now.")
     os.chdir(absolute_path_to_repo)
     sys.path.insert(0, absolute_path_to_repo)

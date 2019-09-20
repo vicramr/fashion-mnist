@@ -22,7 +22,7 @@ To get the Neptune API token, you'll need to create an account at neptune.ml. I 
 ## Import Guidelines
 Here I'm gonna lay out the ground rules for how to do Python imports in this project. My overall goal is to ensure that everything just works, with minimal configuration, in a consistent manner, and without any weird cases. Unfortunately, because of how the Python import system works, there will have to be tradeoffs. The cleanest way to ensure correctness is for me to lay out some rules that the entire codebase must follow:
 1. All import statements should be written relative to the project root directory (that's the directory containing this README file). For example, if you want to import `src/utils.py` in some file `foo.py`, then - no matter where in the project directory `foo.py` is located - you should do `import src.utils` or `from src import utils`, rather than trying to do `import utils`.
-2. All driver scripts must be located in `src`. Not outside of `src`, and not in a subdirectory of `src`. Here, "driver script" refers to any Python file that will be directly run as a script by the end user with `python path/to/filename.py`.
+2. All driver scripts must be located in `drivers`. Not outside of `drivers`, and not in a subdirectory of `drivers`. Here, "driver script" refers to any Python file that will be directly run as a script by the end user with `python path/to/drivers/filename.py`.
 3. All driver scripts must run the following block before doing anything else (including importing anything):
 ```python
 import initialize
