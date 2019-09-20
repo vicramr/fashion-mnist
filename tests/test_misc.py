@@ -12,12 +12,12 @@ def test_trivial():
 
 from src import utils
 
-def test_get_src_files():
+def test_get_source_files():
     """
     Should probably be removed or altered, but this does help test that pytest is
     importing correctly.
     """
-    list_of_files = utils.get_src_files()
-    assert os.path.join("src", "experiment1.py") in list_of_files
+    list_of_files = utils.get_source_files()
+    assert os.path.join("drivers", "experiment1.py") in list_of_files
     assert os.path.join("src", "utils.py") in list_of_files
-    assert os.path.join("src", "initialize.py") in list_of_files
+    assert os.path.join("drivers", "initialize.py") in list_of_files
