@@ -8,10 +8,14 @@ import numpy as np
 
 from fashion_mnist_submodule.utils import mnist_reader
 
-def get_source_files():
+def get_source_files(include_notebooks=True):
     """
     Returns a list of strings that contains paths to all the source (.py or .ipynb) files
     in the project. This is useful for getting a list of source files to upload to Neptune.
+
+    If include_notebooks is true, then .ipynb files will be included; otherwise they will
+    be excluded. This option is given because .ipynb files are generally notably larger than
+    other source files in terms of file size.
     """
     # In order to do the globbing in a platform-independent manner, I'm using pathlib.
 
@@ -24,7 +28,10 @@ def get_source_files():
     pathlist_src = [os.fspath(path) for path in list_of_concrete_paths_src]
     pathlist_notebooks = [os.fspath(path) for path in list_of_concrete_paths_notebooks]
     pathlist_drivers = [os.fspath(path) for path in list_of_concrete_paths_drivers]
-    return pathlist_src + pathlist_notebooks + pathlist_drivers
+    if include_notebooks:
+        return pathlist_src + pathlist_notebooks + pathlist_drivers
+    else:
+        return pathlist_src + pathlist_drivers
 
 def load_raw_training_data():
     """
