@@ -21,3 +21,10 @@ def test_get_source_files():
     assert os.path.join("drivers", "experiment1.py") in list_of_files
     assert os.path.join("src", "utils.py") in list_of_files
     assert os.path.join("drivers", "initialize.py") in list_of_files
+    assert os.path.join("notebooks", "EDA.ipynb") in list_of_files
+
+    files_minus_notebooks = utils.get_source_files(False)
+    assert os.path.join("notebooks", "EDA.ipynb") not in files_minus_notebooks
+    assert os.path.join("drivers", "experiment1.py") in files_minus_notebooks
+    assert os.path.join("src", "utils.py") in files_minus_notebooks
+    assert os.path.join("drivers", "initialize.py") in files_minus_notebooks
