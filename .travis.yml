@@ -1,0 +1,41 @@
+# This file was modified from other .travis.yml files I have made:
+# https://github.com/vicramr/consensuscluster/blob/heatmap/.travis.yml
+# https://github.com/vicramr/escape-utf8/blob/master/.travis.yml
+
+language: minimal
+
+sudo: false
+
+matrix:
+  include:
+    - name: "Xenial (16.04 LTS)"
+      os: linux
+      dist: xenial
+    - name: "Bionic (18.04 LTS)"
+      os: linux
+      dist: bionic
+    - name: "macOS 10.12"
+      os: osx
+      osx_image: xcode9.2
+    - name: "macOS 10.14"
+      os: osx
+      osx_image: xcode11
+
+install:
+  - |
+    if [ $TRAVIS_OS_NAME = 'osx' ]; then
+      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    fi
+  - chmod +x miniconda.sh && ./miniconda.sh -b -p $HOME/miniconda
+  - export PATH=$HOME/miniconda/bin:$PATH
+  - conda update --yes conda
+  - ./setup1.sh
+# setup2 blocks and waits for input, but it's not really necessary for the tests. So I'm excluding it.
+  - source activate fashionmnist
+  - conda list
+
+script:
+  - python --version
+  - python -m pytest tests -v

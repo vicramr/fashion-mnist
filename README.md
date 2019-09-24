@@ -1,3 +1,6 @@
+[![Travis Status](https://travis-ci.com/vicramr/fashion-mnist.svg?branch=master)](https://travis-ci.com/vicramr/fashion-mnist)
+[![AppVeyor Status](https://ci.appveyor.com/api/projects/status/0xav4pxp0s6p2uvf/branch/master?svg=true)](https://ci.appveyor.com/project/vicramr/fashion-mnist/branch/master)
+
 # fashion-mnist
 This is a project using my [kaggle-template](https://github.com/vicramr/kaggle-template) project template.
 

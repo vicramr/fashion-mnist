@@ -1,0 +1,35 @@
+# This file was modified from other appveyor.yml files I have made:
+# https://github.com/vicramr/consensuscluster/blob/heatmap/appveyor.yml
+# https://github.com/vicramr/escape-utf8/blob/master/appveyor.yml
+
+version: 1.0.{build}
+
+build:
+  verbosity: minimal
+
+image:
+  - Visual Studio 2013
+  - Visual Studio 2015
+  - Visual Studio 2017
+  - Visual Studio 2019
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Miniconda36"
+    - PYTHON: "C:\\Miniconda36-x64"
+    - PYTHON: "C:\\Miniconda37"
+    - PYTHON: "C:\\Miniconda37-x64"
+
+install:
+  # Prepend miniconda installed Python to the PATH of this build
+  # Add Library/bin directory to fix issue
+  # https://github.com/conda/conda/issues/1753
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
+  - conda env create -f environment.yml
+  - git submodule update --init --recursive
+  - activate fashionmnist
+  - conda list
+
+test_script:
+  - python --version
+  - python -m pytest tests -v
