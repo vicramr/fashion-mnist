@@ -51,12 +51,16 @@ def _notebook_run(path):
     would be written out, so instead I followed the instructions here to sidestep the
     whole issue and do it all in memory rather than invoking the nbconvert CLI:
     https://nbconvert.readthedocs.io/en/latest/execute_api.html
+
+    TODO right now, we've specifically passing the execution path so the tests don't fail.
+    Might want to also assert that some situations DO cause failures.
     """
 
     with open(path, encoding="utf-8") as f:  # The notebooks should be UTF-8 when committed to git, so this is a safe assumption.
         nb = nbformat.read(f, as_version=4) # https://nbformat.readthedocs.io/en/latest/api.html#nbformat.read
         ep = ExecutePreprocessor(timeout=60) # The docs also specified kernel, but I think the default should be fine.
-        ep.preprocess(nb, {"metadata" : {}}) # This runs the notebook. If any cells throw an exception we'll get a CellExecutionError.
+        execpath = os.path.dirname(path) # Execute the notebook in the notebook's parent dir
+        ep.preprocess(nb, {"metadata": {"path": execpath}}) # This runs the notebook. If any cells throw an exception we'll get a CellExecutionError.
         # NOTE
         # I looked at the source for ExecutePreprocessor.preprocess; it's in directory 'nbconvert/preprocessors/execute.py'.
         # The "path" entry of the metadata dict will be the kernel's execution path.
@@ -87,3 +91,38 @@ def test_paths(dir, path_to_notebook):
     with PushPop(dir):
         assert os.path.isfile(path_to_notebook)
         _notebook_run(path_to_notebook)
+
+def test_PushPop():
+    """
+    This test checks that PushPop indeed sets/resets the directory correctly.
+    """
+    olddir = os.getcwd()
+    with PushPop("."):
+        assert os.path.samefile(os.getcwd(), olddir)
+    assert os.path.samefile(os.getcwd(), olddir)
+
+    with PushPop(".."):
+        assert os.path.samefile(
+            os.getcwd(),
+            os.path.join(olddir, "..")
+        )
+    assert os.path.samefile(os.getcwd(), olddir)
+
+    with PushPop("notebooks"):
+        assert os.path.samefile(
+            os.getcwd(),
+            os.path.join(olddir, "notebooks")
+        )
+    assert os.path.samefile(os.getcwd(), olddir)
+
+    try:
+        with PushPop("src"):
+            assert os.path.samefile(
+                os.getcwd(),
+                os.path.join(olddir, "src")
+            )
+            raise RuntimeError
+        assert False # control should not reach here
+    except RuntimeError:
+        assert os.path.samefile(os.getcwd(), olddir)
+    assert os.path.samefile(os.getcwd(), olddir)
