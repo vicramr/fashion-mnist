@@ -25,6 +25,7 @@ install:
   - conda env create -f environment.yml
   - git submodule update --init --recursive
   - activate fashionmnist
+  - pip install pywin32
   - conda list
 
 build: off
