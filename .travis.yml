@@ -30,12 +30,11 @@ install:
     fi
   - chmod +x miniconda.sh && ./miniconda.sh -b -p $HOME/miniconda
   - export PATH=$HOME/miniconda/bin:$PATH
-  - conda update --yes conda
+#  - conda update --yes conda
   - ./setup1.sh
 # setup2 blocks and waits for input, but it's not really necessary for the tests. So I'm excluding it.
   - source activate fashionmnist
   - conda list
 
 script:
-  - python --version
   - python -m pytest tests -v
