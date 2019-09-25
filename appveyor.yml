@@ -22,11 +22,17 @@ install:
   # Add Library/bin directory to fix issue
   # https://github.com/conda/conda/issues/1753
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PYTHON%\\Library\\bin;%PATH%"
+  - activate
   - conda env create -f environment.yml
   - git submodule update --init --recursive
   - activate fashionmnist
-  - pip install pywin32
+#  - pip install pywin32
   - conda list
+# Currently having some issues getting Miniconda to work right. Here are some potentially-useful links:
+# This appears to be where Miniconda was first added to AppVeyor:
+# https://help.appveyor.com/discussions/suggestions/779-add-anaconda-python-or-at-least-miniconda
+# That links to this issue with some info on how to use it: https://github.com/appveyor/ci/issues/359
+# The important thing to note is that adding stuff to the path is required as per that issue.
 
 build: off
 
